@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 27 2026 г., 09:07
+-- Время создания: Фев 27 2026 г., 09:31
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -35,6 +35,13 @@ CREATE TABLE `Reminder` (
   `reminderPriority` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Дамп данных таблицы `Reminder`
+--
+
+INSERT INTO `Reminder` (`reminderId`, `reminderName`, `reminderDescription`, `reminderDate`, `reminderPriority`) VALUES
+(1, '', NULL, '2026-02-19', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +54,13 @@ CREATE TABLE `User` (
   `totalReminders` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Дамп данных таблицы `User`
+--
+
+INSERT INTO `User` (`userId`, `name`, `totalReminders`) VALUES
+(1, 'root', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +72,13 @@ CREATE TABLE `UserReminders` (
   `userId` int NOT NULL,
   `reminderId` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `UserReminders`
+--
+
+INSERT INTO `UserReminders` (`id`, `userId`, `reminderId`) VALUES
+(1, 1, 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -80,7 +101,8 @@ ALTER TABLE `User`
 --
 ALTER TABLE `UserReminders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `reminderId` (`reminderId`);
+  ADD KEY `reminderId` (`reminderId`),
+  ADD KEY `userId` (`userId`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -90,19 +112,19 @@ ALTER TABLE `UserReminders`
 -- AUTO_INCREMENT для таблицы `Reminder`
 --
 ALTER TABLE `Reminder`
-  MODIFY `reminderId` int NOT NULL AUTO_INCREMENT;
+  MODIFY `reminderId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `User`
 --
 ALTER TABLE `User`
-  MODIFY `userId` int NOT NULL AUTO_INCREMENT;
+  MODIFY `userId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `UserReminders`
 --
 ALTER TABLE `UserReminders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -112,8 +134,8 @@ ALTER TABLE `UserReminders`
 -- Ограничения внешнего ключа таблицы `UserReminders`
 --
 ALTER TABLE `UserReminders`
-  ADD CONSTRAINT `userreminders_ibfk_1` FOREIGN KEY (`id`) REFERENCES `User` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `userreminders_ibfk_2` FOREIGN KEY (`reminderId`) REFERENCES `Reminder` (`reminderId`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `userreminders_ibfk_1` FOREIGN KEY (`reminderId`) REFERENCES `Reminder` (`reminderId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `userreminders_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `User` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
