@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 27 2026 г., 09:31
+-- Время создания: Фев 27 2026 г., 09:38
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -40,7 +40,9 @@ CREATE TABLE `Reminder` (
 --
 
 INSERT INTO `Reminder` (`reminderId`, `reminderName`, `reminderDescription`, `reminderDate`, `reminderPriority`) VALUES
-(1, '', NULL, '2026-02-19', 1);
+(1, '', NULL, '2026-02-19', 1),
+(2, 'John needs to take his medication', 'He must take his stomach painkillers!', '2026-02-28', 3),
+(3, 'John needs to play mobile legends', NULL, '2026-02-28', 3);
 
 -- --------------------------------------------------------
 
@@ -59,7 +61,8 @@ CREATE TABLE `User` (
 --
 
 INSERT INTO `User` (`userId`, `name`, `totalReminders`) VALUES
-(1, 'root', 1);
+(1, 'root', 1),
+(2, 'John', 2);
 
 -- --------------------------------------------------------
 
@@ -78,7 +81,9 @@ CREATE TABLE `UserReminders` (
 --
 
 INSERT INTO `UserReminders` (`id`, `userId`, `reminderId`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(2, 2, 2),
+(3, 2, 3);
 
 --
 -- Индексы сохранённых таблиц
@@ -112,19 +117,19 @@ ALTER TABLE `UserReminders`
 -- AUTO_INCREMENT для таблицы `Reminder`
 --
 ALTER TABLE `Reminder`
-  MODIFY `reminderId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `reminderId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `User`
 --
 ALTER TABLE `User`
-  MODIFY `userId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `UserReminders`
 --
 ALTER TABLE `UserReminders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
